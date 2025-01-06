@@ -15,3 +15,19 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+
+    data = {}
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split("\t")
+            letter = columns[0]
+            dicts = columns[4].split(",")
+            values = [int(i.split(":")[1]) for i in dicts]
+
+            if letter not in data:
+                data[letter] = sum(values)
+                continue
+            data[letter] += sum(values)
+
+    sorted_dict = {key: data[key] for key in sorted(data)}
+    return sorted_dict

@@ -26,3 +26,17 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    dict = {}
+
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split("\t")
+            date = columns[2].split("-")
+            if date[1] in dict:
+                dict[date[1]] += 1
+            else:
+                dict[date[1]] = 1
+
+    return sorted(tuple(dict.items()))
+
+print(pregunta_04())

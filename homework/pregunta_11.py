@@ -16,3 +16,18 @@ def pregunta_11():
 
 
     """
+
+    with open("files/input/data.csv", "r") as file:
+        data = {}
+
+        for line in file:
+            columns = line.strip().split("\t")
+            letters = columns[3].split(",")
+            for letter in letters:
+                if letter not in data:
+                    data[letter] = int(columns[1])
+                    continue
+                data[letter] += int(columns[1])
+        
+        sorted_dict = {key: data[key] for key in sorted(data)}
+        return sorted_dict

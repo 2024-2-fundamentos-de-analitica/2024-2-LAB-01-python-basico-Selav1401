@@ -15,3 +15,14 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    dict = {}
+
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split("\t")
+            if columns[0] in dict:
+                dict[columns[0]] += int(columns[1])
+            else:
+                dict[columns[0]] = int(columns[1])
+
+    return sorted(tuple(dict.items()))

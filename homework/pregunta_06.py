@@ -26,3 +26,26 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    data = {}
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            columns = line.strip().split("\t")
+            dicts = columns[4].split(",")
+
+            for dict in dicts:
+                parts = dict.split(":")
+                ky = parts[0]
+                vl = int(parts[1])
+
+                if ky not in data:
+                    data[ky]= []
+                    data[ky].append(vl)
+                    continue
+                data[ky].append(vl)
+
+    result = []
+    for value in sorted(data.keys()):
+        max_val = max(data[value])
+        min_val = min(data[value])
+        result.append((value, min_val, max_val))
+    return result
